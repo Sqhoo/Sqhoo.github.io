@@ -140,7 +140,7 @@
 <meta property="og:image" content="https://sqhoo.github.io/blogImg/java框架区/SpringCloud利用Eureka搭建注册中心/pic2.png">
 <meta property="og:image" content="https://sqhoo.github.io/blogImg/java框架区/SpringCloud利用Eureka搭建注册中心/pic3.png">
 <meta property="og:image" content="https://sqhoo.github.io/blogImg/java框架区/SpringCloud利用Eureka搭建注册中心/pic4.png">
-<meta property="og:updated_time" content="2019-01-18T08:18:26.942Z">
+<meta property="og:updated_time" content="2019-01-18T08:19:54.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringCloud利用Eureka搭建注册中心">
 <meta name="twitter:description" content="什么是SpringCloud  Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通">
@@ -415,7 +415,7 @@
                 
               
 
-              <time title="创建时间：2019-01-18 11:30:30 / 修改时间：16:18:26" itemprop="dateCreated datePublished" datetime="2019-01-18T11:30:30+08:00">2019-01-18</time>
+              <time title="创建时间：2019-01-18 11:30:30 / 修改时间：16:19:54" itemprop="dateCreated datePublished" datetime="2019-01-18T11:30:30+08:00">2019-01-18</time>
             
 
             
@@ -477,9 +477,11 @@
 <h2 id="创建服务注册中心"><a href="#创建服务注册中心" class="headerlink" title="创建服务注册中心"></a>创建服务注册中心</h2><p>这里采用Eureka作为服务注册与发现的组件 </p>
 <ol>
 <li>创建一个springboot项目，勾选Eureka组件<br><img src="https://sqhoo.github.io/blogImg/java框架区/SpringCloud利用Eureka搭建注册中心/pic1.png" alt="pic1"></li>
-<li><p>编写配置文件（这里使用yml类型的配置文件）<br>application.yml</p>
- <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置服务器端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8761</span></span><br><span class="line"><span class="comment">#配置eureka注册相关配置</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    fetch-registry:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment">#配置注册中心url</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultzone:</span> <span class="attr">http://localhost:$&#123;server.port&#125;/eureka/</span></span><br></pre></td></tr></table></figure>
+<li>编写配置文件（这里使用yml类型的配置文件）<br>application.yml <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置服务器端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8761</span></span><br><span class="line"><span class="comment">#配置eureka注册相关配置</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    fetch-registry:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment">#配置注册中心url</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultzone:</span> <span class="attr">http://localhost:$&#123;server.port&#125;/eureka/</span></span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<a id="more"></a>
+<ol start="3">
 <li><p>编写启动类<br>在启动类上加上<code>@EnableEurekaServer</code>来标识这是注册中心<br>SpringcloudServerApplication.java</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaServer</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringcloudServerApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(SpringcloudServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
