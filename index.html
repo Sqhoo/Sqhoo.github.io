@@ -413,7 +413,7 @@
                 
               
 
-              <time title="创建时间：2019-01-18 11:30:30 / 修改时间：16:22:38" itemprop="dateCreated datePublished" datetime="2019-01-18T11:30:30+08:00">2019-01-18</time>
+              <time title="创建时间：2019-01-18 11:30:30 / 修改时间：16:24:52" itemprop="dateCreated datePublished" datetime="2019-01-18T11:30:30+08:00">2019-01-18</time>
             
 
             
@@ -475,10 +475,7 @@
 </blockquote>
 <h2 id="创建服务注册中心"><a href="#创建服务注册中心" class="headerlink" title="创建服务注册中心"></a>创建服务注册中心</h2><p>这里采用Eureka作为服务注册与发现的组件 </p>
 <ol>
-<li>创建一个springboot项目，勾选Eureka组件<br><img src="https://sqhoo.github.io/blogImg/java框架区/SpringCloud利用Eureka搭建注册中心/pic1.png" alt="pic1"></li>
-<li>编写配置文件（这里使用yml类型的配置文件）<br>application.yml <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置服务器端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8761</span></span><br><span class="line"><span class="comment">#配置eureka注册相关配置</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    fetch-registry:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment">#配置注册中心url</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultzone:</span> <span class="attr">http://localhost:$&#123;server.port&#125;/eureka/</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+<li><p>创建一个springboot项目，勾选Eureka组件</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/18/SpringCloud利用Eureka搭建注册中心/#more" rel="contents">
@@ -488,7 +485,7 @@
           <!--/noindex-->
         
       
-    </div>
+    </li></ol></div>
 
     
 
