@@ -97,7 +97,7 @@
     root: '/',
     scheme: 'Mist',
     version: '6.7.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -124,7 +124,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tcp&#x2F;ip协议">
 <meta property="og:url" content="http://Sqhoo.github.io/2018/07/26/Tcp-ip协议/index.html">
-<meta property="og:site_name" content="Sqhoo&#39;s blog">
+<meta property="og:site_name" content="Sqhoo">
 <meta property="og:description" content="前言我们先来了解一下http协议的请求流程：    建立连接：客户端与服务器建立TCP连接. 发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交.  发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。 关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话  TCP/IP 协议  Transmission Control Protocol/">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://sqhoo.github.io/blogImg/计算机网络区/TcpIp协议/图片1.png">
@@ -138,7 +138,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Sqhoo's blog" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="Sqhoo" type="application/atom+xml">
 
 
 
@@ -153,7 +153,7 @@
   };
 </script>
 
-  <title>Tcp/ip协议 | Sqhoo's blog</title>
+  <title>Tcp/ip协议 | Sqhoo</title>
   
 
 
@@ -211,7 +211,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Sqhoo's blog</span>
+        <span class="site-title">Sqhoo</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -427,7 +427,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Sqhoo's blog">
+      <meta itemprop="name" content="Sqhoo">
     </span>
 
     
@@ -869,7 +869,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-协议"><span class="nav-text">TCP/IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重要的符号"><span class="nav-text">重要的符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手"><span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四次挥手"><span class="nav-text">四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备注"><span class="nav-text">备注</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-协议"><span class="nav-number">2.</span> <span class="nav-text">TCP/IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重要的符号"><span class="nav-number">2.1.</span> <span class="nav-text">重要的符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手"><span class="nav-number">2.2.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四次挥手"><span class="nav-number">2.3.</span> <span class="nav-text">四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备注"><span class="nav-number">2.4.</span> <span class="nav-text">备注</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -941,6 +941,8 @@
     
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
     
