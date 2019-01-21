@@ -2038,7 +2038,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #bf331f;
+  background: #e3e4fb;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3032,7 +3032,7 @@ hr {
   color: #fff;
 }
 ::selection {
-  background-color: #fff159;
+  background-color: #87ceeb;
   color: #555;
 }
 .header {
