@@ -119,22 +119,22 @@
 
 
 
-  <meta name="description" content="前言我们先来了解一下http协议的请求流程：    建立连接：客户端与服务器建立TCP连接. 发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交.  发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。 关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话  TCP/IP 协议  Transmission Control Protocol/">
+  <meta name="description" content="¶前言 我们先来了解一下http协议的请求流程：  建立连接：客户端与服务器建立TCP连接. 发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交. 发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。 关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话  ¶TCP/IP 协议  Transmission Control Protocol/">
 <meta name="keywords" content="面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tcp&#x2F;ip协议">
 <meta property="og:url" content="http://Sqhoo.github.io/2018/07/26/Tcp-ip协议/index.html">
 <meta property="og:site_name" content="Sqhoo">
-<meta property="og:description" content="前言我们先来了解一下http协议的请求流程：    建立连接：客户端与服务器建立TCP连接. 发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交.  发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。 关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话  TCP/IP 协议  Transmission Control Protocol/">
+<meta property="og:description" content="¶前言 我们先来了解一下http协议的请求流程：  建立连接：客户端与服务器建立TCP连接. 发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交. 发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。 关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话  ¶TCP/IP 协议  Transmission Control Protocol/">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://sqhoo.github.io/blogImg/计算机网络区/TcpIp协议/图片1.png">
-<meta property="og:image" content="https://sqhoo.github.io/blogImg/计算机网络区/TcpIp协议/图片2.png">
-<meta property="og:image" content="https://sqhoo.github.io/blogImg/计算机网络区/TcpIp协议/图片3.png">
+<meta property="og:image" content="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%871.png">
+<meta property="og:image" content="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%872.png">
+<meta property="og:image" content="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%873.png">
 <meta property="og:updated_time" content="2018-07-27T14:29:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tcp&#x2F;ip协议">
-<meta name="twitter:description" content="前言我们先来了解一下http协议的请求流程：    建立连接：客户端与服务器建立TCP连接. 发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交.  发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。 关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话  TCP/IP 协议  Transmission Control Protocol/">
-<meta name="twitter:image" content="https://sqhoo.github.io/blogImg/计算机网络区/TcpIp协议/图片1.png">
+<meta name="twitter:description" content="¶前言 我们先来了解一下http协议的请求流程：  建立连接：客户端与服务器建立TCP连接. 发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交. 发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。 关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话  ¶TCP/IP 协议  Transmission Control Protocol/">
+<meta name="twitter:image" content="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%871.png">
 
 
 
@@ -530,47 +530,56 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们先来了解一下http协议的请求流程：  </p>
+        <h2 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h2>
+<p>我们先来了解一下http协议的请求流程：</p>
 <ol>
 <li>建立连接：客户端与服务器建立TCP连接.</li>
-<li>发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交. </li>
+<li>发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交.</li>
 <li>发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。</li>
 <li>关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话</li>
 </ol>
-<h2 id="TCP-IP-协议"><a href="#TCP-IP-协议" class="headerlink" title="TCP/IP 协议"></a><a href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">TCP/IP 协议</a></h2><blockquote>
-<p> Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台联网设备规定一个地址。  </p>
+<h2 id="tcp-ip-协议"><a class="header-anchor" href="#tcp-ip-协议">¶</a><a href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">TCP/IP 协议</a></h2>
+<blockquote>
+<p>Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台联网设备规定一个地址。</p>
 </blockquote>
-<h3 id="重要的符号"><a href="#重要的符号" class="headerlink" title="重要的符号"></a>重要的符号</h3><a id="more"></a>
-<p><img src="https://sqhoo.github.io/blogImg/计算机网络区/TcpIp协议/图片1.png" alt=""></p>
+<h3 id="重要的符号"><a class="header-anchor" href="#重要的符号">¶</a>重要的符号</h3>
+<a id="more"></a>
+<p><img src="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%871.png" alt=""></p>
 <ol>
 <li>Seq序号：用来标识从TCP源端向目的端发送的字节流，发起方发送数据时对此进行标记。</li>
 <li>Ack序号：确认序号，只有ACK标志位为1时，确认序号字段才有效，Ack=Seq+1。</li>
-<li>标志位:<ul>
+<li>标志位:
+<ul>
 <li>URG：紧急指针有效</li>
 <li>ACK：确认序号有效</li>
 <li>PSH：接收方应该尽快将这个报文交给应用层</li>
 <li>RST：重置连接</li>
 <li>SYN：发起一个新连接</li>
-<li>FIN：释放一个连接  </li>
+<li>FIN：释放一个连接</li>
 </ul>
 </li>
 </ol>
 <p><strong>注意:</strong> ACK表示的是确认序号有效的标志，Ack序号是一个序号，它的值是确认序号的值+1</p>
-<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="https://sqhoo.github.io/blogImg/计算机网络区/TcpIp协议/图片2.png" alt=""></p>
+<h3 id="三次握手"><a class="header-anchor" href="#三次握手">¶</a>三次握手</h3>
+<p><img src="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%872.png" alt=""></p>
 <ol>
 <li>第一次握手：客户端是发起一个新连接，将SYN置为1，随机产生一个序号j赋值给seq，将这两个数据以包的形式发送给客户端，客户端进入了SYN_SENT状态，等待服务端确认。</li>
 <li>第二次握手：服务端收到数据包后，检查SYN为1，知道了客户端请求建立连接，将SYN和ACK都置为1，并将Ack序号置为客户端的确认序号seq+1（j+1），然后又随机产生一个新序号k赋值给seq,将这四个数据以包的形式传给客户端确认连接请求，服务端进入SYN_RCVD状态。</li>
 <li>第三次握手：客户端收到数据包后，确认ACK是否为1以确认第一次握手中的seq是否有效，在检查Ack序号是否为j+1，满足则将ACK置为1，Ack序号置为服务端的确认序号seq+1（k+1）,将这些数据以包的形式发送给服务端，服务端如果检查到ACK为1，Ack序号为k+1，则建立成功，服务端和客户端进入ESTABLISHED状态，三次握手完成。</li>
 </ol>
-<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="https://sqhoo.github.io/blogImg/计算机网络区/TcpIp协议/图片3.png" alt=""></p>
+<h3 id="四次挥手"><a class="header-anchor" href="#四次挥手">¶</a>四次挥手</h3>
+<p><img src="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%873.png" alt=""></p>
 <ol>
 <li>第一次挥手：客户端发送一个FIN传达释放连接指令，随机产生一个序号j赋值给seq，进入FIN_WAIT_1状态</li>
 <li>第二次挥手：服务端收到了客户端发来的FIN信号，同样需要发送ACK以确认seq有效，还需要置Ack为j+1并一起发送到服务端，并随机产生一个序号k赋值给seq。服务器进入CLOSE_WAIT状态</li>
 <li>第三次挥手：服务器发送一个FIN，再发送一次ACK=1，用来关闭服务器到客户端之间的数据传送。服务端进入LAST_ACK状态</li>
 <li>第四次挥手：客户端收到的ACK为1且Ack序号为j+1，则将ACK置为1表示确认序号有效，将Ack序号置为k+1，将数据以包的形式传给服务端，服务端收到检查到ACK为1表示确认序号有效，且Ack序号为k+1,则进入CLOSE状态，完成四次挥手。</li>
 </ol>
-<p><strong>注意:</strong><br>为什么挥手为四次，握手为三次？<br>因为在三次握手中，服务端收到了SYN=1信号，表示建立一个连接且可接收数据，服务器再将数据包传递给客户端确认已确认连接。但是在四次挥手中，服务器收到FIN=1时，表示发送了一个关闭连接的请求，但是并不代表客户端不能接受数据，所以先将一些数据包发给客户端，然后再发送FIN确认关闭请求。所以会与FIN分开发送。</p>
-<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p><a href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">TCP/IP 协议</a>的概念来源于百度百科</p>
+<p><strong>注意:</strong><br>
+为什么挥手为四次，握手为三次？<br>
+因为在三次握手中，服务端收到了SYN=1信号，表示建立一个连接且可接收数据，服务器再将数据包传递给客户端确认已确认连接。但是在四次挥手中，服务器收到FIN=1时，表示发送了一个关闭连接的请求，但是并不代表客户端不能接受数据，所以先将一些数据包发给客户端，然后再发送FIN确认关闭请求。所以会与FIN分开发送。</p>
+<h3 id="备注"><a class="header-anchor" href="#备注">¶</a>备注</h3>
+<p><a href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">TCP/IP 协议</a>的概念来源于百度百科</p>
 
       
     </div>
@@ -869,7 +878,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP-协议"><span class="nav-number">2.</span> <span class="nav-text">TCP/IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重要的符号"><span class="nav-number">2.1.</span> <span class="nav-text">重要的符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手"><span class="nav-number">2.2.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四次挥手"><span class="nav-number">2.3.</span> <span class="nav-text">四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备注"><span class="nav-number">2.4.</span> <span class="nav-text">备注</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">¶前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tcp-ip-协议"><span class="nav-number">2.</span> <span class="nav-text">¶TCP/IP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重要的符号"><span class="nav-number">2.1.</span> <span class="nav-text">¶重要的符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手"><span class="nav-number">2.2.</span> <span class="nav-text">¶三次握手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四次挥手"><span class="nav-number">2.3.</span> <span class="nav-text">¶四次挥手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备注"><span class="nav-number">2.4.</span> <span class="nav-text">¶备注</span></a></li></ol></li></ol></div>
             
 
           </div>

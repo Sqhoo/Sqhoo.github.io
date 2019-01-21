@@ -119,23 +119,23 @@
 
 
 
-  <meta name="description" content="介绍一些常用的EL表达式首先先了解一下什么是EL表达式EL表达式：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。   针对EL表达式是否生效请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.012">
+  <meta name="description" content="介绍一些常用的EL表达式 ¶首先先了解一下什么是EL表达式 EL表达式：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。 ¶针对EL表达式是否生效 请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.">
 <meta name="keywords" content="EL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EL表达式">
 <meta property="og:url" content="http://Sqhoo.github.io/2018/07/09/EL表达式/index.html">
 <meta property="og:site_name" content="Sqhoo">
-<meta property="og:description" content="介绍一些常用的EL表达式首先先了解一下什么是EL表达式EL表达式：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。   针对EL表达式是否生效请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.012">
+<meta property="og:description" content="介绍一些常用的EL表达式 ¶首先先了解一下什么是EL表达式 EL表达式：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。 ¶针对EL表达式是否生效 请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://sqhoo.github.io/blogImg/jsp区/EL表达式/EL_1.png">
-<meta property="og:image" content="https://sqhoo.github.io/blogImg/jsp区/EL表达式/EL_2.png">
-<meta property="og:image" content="https://sqhoo.github.io/blogImg/jsp区/EL表达式/EL_3.png">
-<meta property="og:image" content="https://sqhoo.github.io/blogImg/jsp区/EL表达式/EL_4.png">
+<meta property="og:image" content="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_1.png">
+<meta property="og:image" content="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_2.png">
+<meta property="og:image" content="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_3.png">
+<meta property="og:image" content="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_4.png">
 <meta property="og:updated_time" content="2018-07-10T09:44:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EL表达式">
-<meta name="twitter:description" content="介绍一些常用的EL表达式首先先了解一下什么是EL表达式EL表达式：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。   针对EL表达式是否生效请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.012">
-<meta name="twitter:image" content="https://sqhoo.github.io/blogImg/jsp区/EL表达式/EL_1.png">
+<meta name="twitter:description" content="介绍一些常用的EL表达式 ¶首先先了解一下什么是EL表达式 EL表达式：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。 ¶针对EL表达式是否生效 请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.">
+<meta name="twitter:image" content="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_1.png">
 
 
 
@@ -531,31 +531,48 @@
       
 
       
-        <h1 id="介绍一些常用的EL表达式"><a href="#介绍一些常用的EL表达式" class="headerlink" title="介绍一些常用的EL表达式"></a>介绍一些常用的EL表达式</h1><h4 id="首先先了解一下什么是EL表达式"><a href="#首先先了解一下什么是EL表达式" class="headerlink" title="首先先了解一下什么是EL表达式"></a>首先先了解一下什么是EL表达式</h4><p><a href="https://baike.baidu.com/item/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/1190845" target="_blank" rel="noopener">EL表达式</a>：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。  </p>
-<h4 id="针对EL表达式是否生效"><a href="#针对EL表达式是否生效" class="headerlink" title="针对EL表达式是否生效"></a>针对EL表达式是否生效</h4><p>请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.0<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">"2.4"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>如果没有的话，说明是Servlet2.3 / JSP1.2,可在jsp页面直接加上这段话或者在开头加上<code>&lt;%@ page isELIgnored=&quot;false&quot;&gt;</code>或者，在web.xml中加入以下代码<br><a id="more"></a><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jsp-config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-ignored</span>&gt;</span>false<span class="tag">&lt;/<span class="name">el-ignored</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">jsp-config</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="一些基本语法"><a href="#一些基本语法" class="headerlink" title="一些基本语法"></a>一些基本语法</h4><ol>
-<li>使用变量名获取值<br>请看下面的例子：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">request.setAttribute(<span class="string">"username"</span>,<span class="string">"zhangsan"</span>); </span><br><span class="line">%&gt;</span><br><span class="line">获取的值为：$&#123;username&#125;</span><br></pre></td></tr></table></figure>
-</li>
+        <h1>介绍一些常用的EL表达式</h1>
+<h4 id="首先先了解一下什么是el表达式"><a class="header-anchor" href="#首先先了解一下什么是el表达式">¶</a>首先先了解一下什么是EL表达式</h4>
+<p><a href="https://baike.baidu.com/item/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/1190845" target="_blank" rel="noopener">EL表达式</a>：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。</p>
+<h4 id="针对el表达式是否生效"><a class="header-anchor" href="#针对el表达式是否生效">¶</a>针对EL表达式是否生效</h4>
+<p>请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.0</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">"2.4"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果没有的话，说明是Servlet2.3 / JSP1.2,可在jsp页面直接加上这段话或者在开头加上<code>&lt;%@ page isELIgnored=&quot;false&quot;&gt;</code>或者，在web.xml中加入以下代码</p>
+<a id="more"></a>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jsp-config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-ignored</span>&gt;</span>false<span class="tag">&lt;/<span class="name">el-ignored</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">jsp-config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="一些基本语法"><a class="header-anchor" href="#一些基本语法">¶</a>一些基本语法</h4>
+<ol>
+<li>使用变量名获取值<br>
+请看下面的例子：</li>
 </ol>
-<p>运行结果:<br><img src="https://sqhoo.github.io/blogImg/jsp区/EL表达式/EL_1.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">request.setAttribute(<span class="string">"username"</span>,<span class="string">"zhangsan"</span>); </span><br><span class="line">%&gt;</span><br><span class="line">获取的值为：$&#123;username&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_1.png" alt=""></p>
 <ol start="2">
-<li>使用对象名获取属性值<br>请看下面的例子：<br>首先定义一个实体类User,定义姓名、年龄、性别为这个类的属性，生成getter和setter方法<br>然后在jsp页面写上setter方法,然后用EL表达式取出数据。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">User user=<span class="keyword">new</span> User();<span class="comment">//实例化一个User</span></span><br><span class="line">user.setName=<span class="string">"lisi"</span>;</span><br><span class="line">user.setAge=<span class="number">12</span>;</span><br><span class="line">user.setSex=<span class="string">"女"</span>;</span><br><span class="line">request.setAttribute(<span class="string">"User"</span>,user);</span><br><span class="line">%&gt;</span><br><span class="line">姓名：$&#123;User.Name&#125;&lt;br&gt;</span><br><span class="line">年龄：$&#123;User.Age&#125;&lt;br&gt;</span><br><span class="line">性别：$&#123;User[<span class="string">"Sex"</span>]&#125;&lt;br&gt;<span class="comment">//这也是一种方法</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>使用对象名获取属性值<br>
+请看下面的例子：<br>
+首先定义一个实体类User,定义姓名、年龄、性别为这个类的属性，生成getter和setter方法<br>
+然后在jsp页面写上setter方法,然后用EL表达式取出数据。</li>
 </ol>
-<p>运行结果:<br><img src="https://sqhoo.github.io/blogImg/jsp区/EL表达式/EL_2.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">User user=<span class="keyword">new</span> User();<span class="comment">//实例化一个User</span></span><br><span class="line">user.setName=<span class="string">"lisi"</span>;</span><br><span class="line">user.setAge=<span class="number">12</span>;</span><br><span class="line">user.setSex=<span class="string">"女"</span>;</span><br><span class="line">request.setAttribute(<span class="string">"User"</span>,user);</span><br><span class="line">%&gt;</span><br><span class="line">姓名：$&#123;User.Name&#125;&lt;br&gt;</span><br><span class="line">年龄：$&#123;User.Age&#125;&lt;br&gt;</span><br><span class="line">性别：$&#123;User[<span class="string">"Sex"</span>]&#125;&lt;br&gt;<span class="comment">//这也是一种方法</span></span><br></pre></td></tr></table></figure>
+<p>运行结果:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_2.png" alt=""></p>
 <ol start="3">
-<li>获取集合中的内容<br>例子如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">  List names=<span class="keyword">new</span> ArrayList();   <span class="comment">//定义一个list</span></span><br><span class="line">  names.add(<span class="string">"zhangsan"</span>);</span><br><span class="line">  names.add(<span class="string">"lisi"</span>);</span><br><span class="line">  request.setAttribute(<span class="string">"names"</span>,names);</span><br><span class="line">%&gt;</span><br><span class="line">姓名<span class="number">1</span>:$&#123;names[<span class="number">0</span>]&#125; &lt;br&gt;</span><br><span class="line">姓名<span class="number">2</span>:$&#123;names[<span class="number">1</span>]&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>获取集合中的内容<br>
+例子如下：</li>
 </ol>
-<p>运行结果:<br><img src="https://sqhoo.github.io/blogImg/jsp区/EL表达式/EL_3.png" alt="">  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">  List names=<span class="keyword">new</span> ArrayList();   <span class="comment">//定义一个list</span></span><br><span class="line">  names.add(<span class="string">"zhangsan"</span>);</span><br><span class="line">  names.add(<span class="string">"lisi"</span>);</span><br><span class="line">  request.setAttribute(<span class="string">"names"</span>,names);</span><br><span class="line">%&gt;</span><br><span class="line">姓名<span class="number">1</span>:$&#123;names[<span class="number">0</span>]&#125; &lt;br&gt;</span><br><span class="line">姓名<span class="number">2</span>:$&#123;names[<span class="number">1</span>]&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_3.png" alt=""></p>
 <ol start="4">
-<li>获取Map中的内容<br>例子如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">  Map map=<span class="keyword">new</span> HashMap();<span class="comment">//定义一个hashmap</span></span><br><span class="line">  map.put(<span class="string">"one"</span>,<span class="string">"zhangsan"</span>);</span><br><span class="line">  map.put(<span class="string">"two"</span>,<span class="string">"lisi"</span>);</span><br><span class="line">  request.setAttribute(<span class="string">"map"</span>,map);</span><br><span class="line">%&gt;</span><br><span class="line">姓名<span class="number">1</span>:$&#123;map[<span class="string">"one"</span>]&#125; &lt;br&gt;</span><br><span class="line">姓名<span class="number">2</span>:$&#123;map[<span class="string">"two"</span>]&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>获取Map中的内容<br>
+例子如下：</li>
 </ol>
-<p>运行结果:<br><img src="https://sqhoo.github.io/blogImg/jsp区/EL表达式/EL_4.png" alt="">  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">  Map map=<span class="keyword">new</span> HashMap();<span class="comment">//定义一个hashmap</span></span><br><span class="line">  map.put(<span class="string">"one"</span>,<span class="string">"zhangsan"</span>);</span><br><span class="line">  map.put(<span class="string">"two"</span>,<span class="string">"lisi"</span>);</span><br><span class="line">  request.setAttribute(<span class="string">"map"</span>,map);</span><br><span class="line">%&gt;</span><br><span class="line">姓名<span class="number">1</span>:$&#123;map[<span class="string">"one"</span>]&#125; &lt;br&gt;</span><br><span class="line">姓名<span class="number">2</span>:$&#123;map[<span class="string">"two"</span>]&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_4.png" alt=""></p>
 <ol start="5">
-<li>EL表达式逻辑操作符  </li>
+<li>EL表达式逻辑操作符</li>
 </ol>
 <table>
 <thead>
@@ -599,9 +616,11 @@
 </tr>
 </tbody>
 </table>
-<p><strong>注意：</strong> 在EL表达式中这两种都可以用例如<code>${2 == 5}</code>和<code>${2 eq 5}</code>返回的值都为false  </p>
+<p><strong>注意：</strong> 在EL表达式中这两种都可以用例如<code>${2 == 5}</code>和<code>${2 eq 5}</code>返回的值都为false</p>
 <hr>
-<p><strong>备注：</strong><br>EL表达式概念来源<a href="https://baike.baidu.com/item/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/1190845" target="_blank" rel="noopener">百度百科</a><br>EL表达式生效问题来源<a href="http://www.cnblogs.com/MickWoo/p/3998240.html" target="_blank" rel="noopener">博客园</a>  </p>
+<p><strong>备注：</strong><br>
+EL表达式概念来源<a href="https://baike.baidu.com/item/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/1190845" target="_blank" rel="noopener">百度百科</a><br>
+EL表达式生效问题来源<a href="http://www.cnblogs.com/MickWoo/p/3998240.html" target="_blank" rel="noopener">博客园</a></p>
 
       
     </div>
@@ -900,7 +919,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍一些常用的EL表达式"><span class="nav-number">1.</span> <span class="nav-text">介绍一些常用的EL表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先先了解一下什么是EL表达式"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">首先先了解一下什么是EL表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#针对EL表达式是否生效"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">针对EL表达式是否生效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一些基本语法"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">一些基本语法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">介绍一些常用的EL表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先先了解一下什么是el表达式"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">¶首先先了解一下什么是EL表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#针对el表达式是否生效"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">¶针对EL表达式是否生效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一些基本语法"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">¶一些基本语法</span></a></li></ol></li></ol></div>
             
 
           </div>

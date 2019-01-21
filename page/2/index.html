@@ -528,9 +528,13 @@
 
       
         
-          <h1 id="介绍一些常用的EL表达式"><a href="#介绍一些常用的EL表达式" class="headerlink" title="介绍一些常用的EL表达式"></a>介绍一些常用的EL表达式</h1><h4 id="首先先了解一下什么是EL表达式"><a href="#首先先了解一下什么是EL表达式" class="headerlink" title="首先先了解一下什么是EL表达式"></a>首先先了解一下什么是EL表达式</h4><p><a href="https://baike.baidu.com/item/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/1190845" target="_blank" rel="noopener">EL表达式</a>：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。  </p>
-<h4 id="针对EL表达式是否生效"><a href="#针对EL表达式是否生效" class="headerlink" title="针对EL表达式是否生效"></a>针对EL表达式是否生效</h4><p>请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.0<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">"2.4"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>如果没有的话，说明是Servlet2.3 / JSP1.2,可在jsp页面直接加上这段话或者在开头加上<code>&lt;%@ page isELIgnored=&quot;false&quot;&gt;</code>或者，在web.xml中加入以下代码<br>
+          <h1>介绍一些常用的EL表达式</h1>
+<h4 id="首先先了解一下什么是el表达式"><a class="header-anchor" href="#首先先了解一下什么是el表达式">¶</a>首先先了解一下什么是EL表达式</h4>
+<p><a href="https://baike.baidu.com/item/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/1190845" target="_blank" rel="noopener">EL表达式</a>：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。</p>
+<h4 id="针对el表达式是否生效"><a class="header-anchor" href="#针对el表达式是否生效">¶</a>针对EL表达式是否生效</h4>
+<p>请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.0</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">"2.4"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果没有的话，说明是Servlet2.3 / JSP1.2,可在jsp页面直接加上这段话或者在开头加上<code>&lt;%@ page isELIgnored=&quot;false&quot;&gt;</code>或者，在web.xml中加入以下代码</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -542,7 +546,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
 
@@ -699,13 +703,16 @@
 
       
         
-          <h2 id="什么是session"><a href="#什么是session" class="headerlink" title="什么是session?"></a>什么是<a href="https://baike.baidu.com/item/session/479100?fr=aladdin" target="_blank" rel="noopener">session</a>?</h2><blockquote>
+          <h2 id="什么是session"><a class="header-anchor" href="#什么是session">¶</a>什么是<a href="https://baike.baidu.com/item/session/479100?fr=aladdin" target="_blank" rel="noopener">session</a>?</h2>
+<blockquote>
 <p>Session:在计算机中，尤其是在网络应用中，称为“会话控制”。Session 对象存储特定用户会话所需的属性及配置信息。这样，当用户在应用程序的 Web 页之间跳转时，存储在 Session 对象中的变量将不会丢失，而是在整个用户会话中一直存在下去。当用户请求来自应用程序的 Web 页时，如果该用户还没有会话，则 Web 服务器将自动创建一个 Session 对象。当会话过期或被放弃后，服务器将终止该会话。Session 对象最常见的一个用法就是存储用户的首选项。</p>
 </blockquote>
 <ol>
-<li>在这之前，我们现在创建一个登录界面<br>部分代码如下:<br>Login.jsp<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">id</span>=<span class="string">"form"</span>&gt;</span></span><br><span class="line">    username:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    password:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>在这之前，我们现在创建一个登录界面<br>
+部分代码如下:<br>
+Login.jsp</li>
 </ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">id</span>=<span class="string">"form"</span>&gt;</span></span><br><span class="line">    username:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    password:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -886,12 +893,15 @@
 
       
         
-          <h1 id="Markdown-常用语法"><a href="#Markdown-常用语法" class="headerlink" title="Markdown 常用语法"></a>Markdown 常用语法</h1><p><br></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
-</blockquote>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>1.用#来识别<br>例如：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line"><span class="section">### 三级标题</span></span><br><span class="line"><span class="section">#### 四级标题</span></span><br><span class="line"><span class="code">     ...</span></span><br></pre></td></tr></table></figure></p>
-<p>效果如下：<br>
+          <h1>Markdown 常用语法</h1>
+<br>
+## 简介
+> Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。
+## 标题
+1.用#来识别  
+例如：
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line"><span class="section">### 三级标题</span></span><br><span class="line"><span class="section">#### 四级标题</span></span><br><span class="line"><span class="code">     ...</span></span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -903,7 +913,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
 
     
 

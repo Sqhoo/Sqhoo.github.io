@@ -516,12 +516,15 @@
 
       
         
-          <h2 id="什么是SpringCloud"><a href="#什么是SpringCloud" class="headerlink" title="什么是SpringCloud"></a>什么是<a href="https://baike.baidu.com/item/spring%20cloud/20269825?fr=aladdin" target="_blank" rel="noopener">SpringCloud</a></h2><blockquote>
-<p> Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。</p>
+          <h2 id="什么是springcloud"><a class="header-anchor" href="#什么是springcloud">¶</a>什么是<a href="https://baike.baidu.com/item/spring%20cloud/20269825?fr=aladdin" target="_blank" rel="noopener">SpringCloud</a></h2>
+<blockquote>
+<p>Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。</p>
 </blockquote>
-<h2 id="创建服务注册中心"><a href="#创建服务注册中心" class="headerlink" title="创建服务注册中心"></a>创建服务注册中心</h2><p>这里采用Eureka作为服务注册与发现的组件 </p>
+<h2 id="创建服务注册中心"><a class="header-anchor" href="#创建服务注册中心">¶</a>创建服务注册中心</h2>
+<p>这里采用Eureka作为服务注册与发现的组件</p>
 <ol>
-<li><p>创建一个springboot项目，勾选Eureka组件</p>
+<li>创建一个springboot项目，勾选Eureka组件</li>
+</ol>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -533,7 +536,7 @@
           <!--/noindex-->
         
       
-    </li></ol></div>
+    </div>
 
     
 
@@ -702,16 +705,18 @@
 
       
         
-          <h2 id="什么是springboot"><a href="#什么是springboot" class="headerlink" title="什么是springboot"></a>什么是<a href="https://baike.baidu.com/item/Spring%20Boot/20249767?fr=aladdin" target="_blank" rel="noopener">springboot</a></h2><blockquote>
-<p> Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。</p>
+          <h2 id="什么是springboot"><a class="header-anchor" href="#什么是springboot">¶</a>什么是<a href="https://baike.baidu.com/item/Spring%20Boot/20249767?fr=aladdin" target="_blank" rel="noopener">springboot</a></h2>
+<blockquote>
+<p>Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。</p>
 </blockquote>
-<h2 id="搭建MVC框架"><a href="#搭建MVC框架" class="headerlink" title="搭建MVC框架"></a>搭建MVC框架</h2><ol>
-<li>在pom文件中导入依赖  <ul>
-<li>说明： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这一块是springboot核心依赖部分 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
+<h2 id="搭建mvc框架"><a class="header-anchor" href="#搭建mvc框架">¶</a>搭建MVC框架</h2>
+<ol>
+<li>在pom文件中导入依赖</li>
 </ol>
+<ul>
+<li>说明：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这一块是springboot核心依赖部分 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -892,18 +897,29 @@
 
       
         
-          <h3 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h3><blockquote>
+          <h3 id="什么是线程"><a class="header-anchor" href="#什么是线程">¶</a>什么是线程</h3>
+<blockquote>
 <p>线程是进程中的一个实体，是被系统独立调度和分派的基本单位</p>
 </blockquote>
-<h3 id="线程和进程的区别"><a href="#线程和进程的区别" class="headerlink" title="线程和进程的区别"></a>线程和进程的区别</h3><blockquote>
-<p>&emsp;&emsp;进程:具有一定独立功能的程序关于某个数据集合上的一次运行活动,是操作系统进行资源分配和调度的一个独立单位。<br>&emsp;&emsp;线程:是进程的一个实体,是 cpu 调度和分派的基本单位,是比进程更小的可以独立运行的基本单位。<br>&emsp;&emsp;特点:线程的划分尺度小于进程,这使多线程程序拥有高并发性,进程在运行时各自内存单元相互独立,线程之间内存共享,这使多线程编程可以拥有更好的性能和用户体验。</p>
+<h3 id="线程和进程的区别"><a class="header-anchor" href="#线程和进程的区别">¶</a>线程和进程的区别</h3>
+<blockquote>
+<p>  进程:具有一定独立功能的程序关于某个数据集合上的一次运行活动,是操作系统进行资源分配和调度的一个独立单位。<br>
+  线程:是进程的一个实体,是 cpu 调度和分派的基本单位,是比进程更小的可以独立运行的基本单位。<br>
+  特点:线程的划分尺度小于进程,这使多线程程序拥有高并发性,进程在运行时各自内存单元相互独立,线程之间内存共享,这使多线程编程可以拥有更好的性能和用户体验。</p>
 </blockquote>
-<h3 id="创建线程的4种方法"><a href="#创建线程的4种方法" class="headerlink" title="创建线程的4种方法"></a>创建线程的4种方法</h3><ol>
-<li><p>继承Thread类</p>
+<h3 id="创建线程的4种方法"><a class="header-anchor" href="#创建线程的4种方法">¶</a>创建线程的4种方法</h3>
+<ol>
+<li>继承Thread类</li>
+</ol>
 <ul>
-<li>定义Thread类的子类，并重写run方法,run方法就是线程所要完成是任务</li>
-<li>创建Thread类的实例</li>
-<li><p>调用该线程的start方法以启动线程</p>
+<li>
+<p>定义Thread类的子类，并重写run方法,run方法就是线程所要完成是任务</p>
+</li>
+<li>
+<p>创建Thread类的实例</p>
+</li>
+<li>
+<p>调用该线程的start方法以启动线程</p>
 <p>ThreadMethod.java</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadMethod</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"继承Thread方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
@@ -917,7 +933,7 @@
           <!--/noindex-->
         
       
-    </li></ul></li></ol></div>
+    </li></ul></div>
 
     
 
@@ -1086,17 +1102,19 @@
 
       
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们先来了解一下http协议的请求流程：  </p>
+          <h2 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h2>
+<p>我们先来了解一下http协议的请求流程：</p>
 <ol>
 <li>建立连接：客户端与服务器建立TCP连接.</li>
-<li>发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交. </li>
+<li>发送请求：打开一个连接后，客户端把请求信息发送到服务器的相应端口上，完成请求动作提交.</li>
 <li>发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。</li>
 <li>关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话</li>
 </ol>
-<h2 id="TCP-IP-协议"><a href="#TCP-IP-协议" class="headerlink" title="TCP/IP 协议"></a><a href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">TCP/IP 协议</a></h2><blockquote>
-<p> Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台联网设备规定一个地址。  </p>
+<h2 id="tcp-ip-协议"><a class="header-anchor" href="#tcp-ip-协议">¶</a><a href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">TCP/IP 协议</a></h2>
+<blockquote>
+<p>Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台联网设备规定一个地址。</p>
 </blockquote>
-<h3 id="重要的符号"><a href="#重要的符号" class="headerlink" title="重要的符号"></a>重要的符号</h3>
+<h3 id="重要的符号"><a class="header-anchor" href="#重要的符号">¶</a>重要的符号</h3>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1277,12 +1295,17 @@
 
       
         
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的<code>jsp:include</code>标签可以实现母版页这个功能。</p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><ol>
-<li><p>新建一个<code>mater.jsp</code>页面<br>代码如下：  </p>
+          <h2 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h2>
+<p>如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的<code>jsp:include</code>标签可以实现母版页这个功能。</p>
+<h2 id="使用方法"><a class="header-anchor" href="#使用方法">¶</a>使用方法</h2>
+<ol>
+<li>新建一个<code>mater.jsp</code>页面<br>
+代码如下：</li>
+</ol>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--其他代码从这里拼接--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">jsp:include</span> <span class="attr">page</span>=<span class="string">"&lt;%= request.getParameter(\"</span><span class="attr">page</span>\")%&gt;</span>"/&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>新建一个<code>son.jsp</code>页面  </p>
+<ol start="2">
+<li>新建一个<code>son.jsp</code>页面</li>
+</ol>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1294,7 +1317,7 @@
           <!--/noindex-->
         
       
-    </li></ol></div>
+    </div>
 
     
 
