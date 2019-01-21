@@ -528,22 +528,99 @@
 
       
         
-          <h1>介绍一些常用的EL表达式</h1>
-<h4 id="首先先了解一下什么是el表达式"><a class="header-anchor" href="#首先先了解一下什么是el表达式">¶</a>首先先了解一下什么是EL表达式</h4>
+          
+            <h1>介绍一些常用的EL表达式</h1>
+<h4>首先先了解一下什么是EL表达式</h4>
 <p><a href="https://baike.baidu.com/item/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/1190845" target="_blank" rel="noopener">EL表达式</a>：EL（Expression Language） 是为了使JSP写起来更加简单。表达式语言的灵感来自于 ECMAScript 和 XPath 表达式语言，它提供了在 JSP 中简化表达式的方法，让Jsp的代码更加简化。</p>
-<h4 id="针对el表达式是否生效"><a class="header-anchor" href="#针对el表达式是否生效">¶</a>针对EL表达式是否生效</h4>
-<p>请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.0</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">"2.4"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>如果没有的话，说明是Servlet2.3 / JSP1.2,可在jsp页面直接加上这段话或者在开头加上<code>&lt;%@ page isELIgnored=&quot;false&quot;&gt;</code>或者，在web.xml中加入以下代码</p>
-          <!--noindex-->
+<h4>针对EL表达式是否生效</h4>
+<p>请查下web.xml下的开头，如有以下内容，表示Servlet2.4 / JSP2.0
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">"2.4"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> </span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果没有的话，说明是Servlet2.3 / JSP1.2,可在jsp页面直接加上这段话或者在开头加上<code>&lt;%@ page isELIgnored=&quot;false&quot;&gt;</code>或者，在web.xml中加入以下代码<br>
+&lt;!-- more --&gt;
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">jsp-config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-ignored</span>&gt;</span>false<span class="tag">&lt;/<span class="name">el-ignored</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">jsp-config</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4>一些基本语法</h4>
+<ol>
+<li>使用变量名获取值
+请看下面的例子：<br>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">request.setAttribute(<span class="string">"username"</span>,<span class="string">"zhangsan"</span>); </span><br><span class="line">%&gt;</span><br><span class="line">获取的值为：$&#123;username&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>运行结果:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_1.png" alt=""></p>
+<ol start="2">
+<li>使用对象名获取属性值
+请看下面的例子：<br>
+首先定义一个实体类User,定义姓名、年龄、性别为这个类的属性，生成getter和setter方法<br>
+然后在jsp页面写上setter方法,然后用EL表达式取出数据。
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">User user=<span class="keyword">new</span> User();<span class="comment">//实例化一个User</span></span><br><span class="line">user.setName=<span class="string">"lisi"</span>;</span><br><span class="line">user.setAge=<span class="number">12</span>;</span><br><span class="line">user.setSex=<span class="string">"女"</span>;</span><br><span class="line">request.setAttribute(<span class="string">"User"</span>,user);</span><br><span class="line">%&gt;</span><br><span class="line">姓名：$&#123;User.Name&#125;&lt;br&gt;</span><br><span class="line">年龄：$&#123;User.Age&#125;&lt;br&gt;</span><br><span class="line">性别：$&#123;User[<span class="string">"Sex"</span>]&#125;&lt;br&gt;<span class="comment">//这也是一种方法</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>运行结果:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_2.png" alt=""></p>
+<ol start="3">
+<li>获取集合中的内容<br>
+例子如下：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">  List names=<span class="keyword">new</span> ArrayList();   <span class="comment">//定义一个list</span></span><br><span class="line">  names.add(<span class="string">"zhangsan"</span>);</span><br><span class="line">  names.add(<span class="string">"lisi"</span>);</span><br><span class="line">  request.setAttribute(<span class="string">"names"</span>,names);</span><br><span class="line">%&gt;</span><br><span class="line">姓名<span class="number">1</span>:$&#123;names[<span class="number">0</span>]&#125; &lt;br&gt;</span><br><span class="line">姓名<span class="number">2</span>:$&#123;names[<span class="number">1</span>]&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>运行结果:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_3.png" alt=""></p>
+<ol start="4">
+<li>获取Map中的内容<br>
+例子如下：
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">  Map map=<span class="keyword">new</span> HashMap();<span class="comment">//定义一个hashmap</span></span><br><span class="line">  map.put(<span class="string">"one"</span>,<span class="string">"zhangsan"</span>);</span><br><span class="line">  map.put(<span class="string">"two"</span>,<span class="string">"lisi"</span>);</span><br><span class="line">  request.setAttribute(<span class="string">"map"</span>,map);</span><br><span class="line">%&gt;</span><br><span class="line">姓名<span class="number">1</span>:$&#123;map[<span class="string">"one"</span>]&#125; &lt;br&gt;</span><br><span class="line">姓名<span class="number">2</span>:$&#123;map[<span class="string">"two"</span>]&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>运行结果:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/EL_4.png" alt=""></p>
+<ol start="5">
+<li>EL表达式逻辑操作符</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>关系运算符</th>
+<th>相等转换</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>==</td>
+<td>eq</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>ne</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>lt</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>gt</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>le</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>ge</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>and</td>
+</tr>
+<tr>
+<td>!</td>
+<td>not</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong> 在EL表达式中这两种都可以用例如<code>${2 == 5}</code>和<code>${2 eq 5}</code>返回的值都为false</p>
+<hr>
+<p><strong>备注：</strong><br>
+EL表达式概念来源<a href="https://baike.baidu.com/item/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/1190845" target="_blank" rel="noopener">百度百科</a><br>
+EL表达式生效问题来源<a href="http://www.cnblogs.com/MickWoo/p/3998240.html" target="_blank" rel="noopener">博客园</a></p>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/09/EL表达式/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -703,25 +780,46 @@
 
       
         
-          <h2 id="什么是session"><a class="header-anchor" href="#什么是session">¶</a>什么是<a href="https://baike.baidu.com/item/session/479100?fr=aladdin" target="_blank" rel="noopener">session</a>?</h2>
+          
+            <h2>什么是<a href="https://baike.baidu.com/item/session/479100?fr=aladdin" target="_blank" rel="noopener">session</a>?</h2>
 <blockquote>
 <p>Session:在计算机中，尤其是在网络应用中，称为“会话控制”。Session 对象存储特定用户会话所需的属性及配置信息。这样，当用户在应用程序的 Web 页之间跳转时，存储在 Session 对象中的变量将不会丢失，而是在整个用户会话中一直存在下去。当用户请求来自应用程序的 Web 页时，如果该用户还没有会话，则 Web 服务器将自动创建一个 Session 对象。当会话过期或被放弃后，服务器将终止该会话。Session 对象最常见的一个用法就是存储用户的首选项。</p>
 </blockquote>
 <ol>
 <li>在这之前，我们现在创建一个登录界面<br>
 部分代码如下:<br>
-Login.jsp</li>
+Login.jsp
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">id</span>=<span class="string">"form"</span>&gt;</span></span><br><span class="line">    username:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    password:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">id</span>=<span class="string">"form"</span>&gt;</span></span><br><span class="line">    username:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"username"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    password:<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
+<p>&lt;!-- more --&gt;</p>
+<ol start="2">
+<li>
+<p>创建中间处理界面<br>
+这里用到了jsp中的<code>RequestDispatcher</code>对象:<br>
+它可以在对个界面实现请求数据的共享，所以这里的中间处理界面和<code>welcome.jsp</code>界面的内容必须进行共享，使得<code>welcome.jsp</code>中的数据可以跨界面使用<br>
+部分代码如下:<br>
+doLogin.jsp
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;%</span><br><span class="line">    String username=<span class="keyword">new</span> String(request.getParameter(<span class="string">"username"</span>).getBytes(<span class="string">"ISO-8859-1"</span>),<span class="string">"UTF-8"</span>);<span class="comment">//处理中文乱码</span></span><br><span class="line">    session.setAttribute(<span class="string">"username"</span>,username);</span><br><span class="line">    request.getRequestDispatcher(<span class="string">"welcome.jsp"</span>).forward(request,response);<span class="comment">//与welocome.jsp实现session数据的共享</span></span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>创建欢迎界面<br>
+部分代码如下:<br>
+Welcome.jsp
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">welcome  </span><br><span class="line">&#123;%</span><br><span class="line">String s=session.getAttribute(<span class="string">"username"</span>);</span><br><span class="line"><span class="comment">//如果取出的s为null，则没有经过登录界面进入该欢迎界面，非法访问，跳转到login进行登录。</span></span><br><span class="line"><span class="comment">//因为如果s为null，则session中没有值，所以并没有进行登录来转到该欢迎界面，而是直接访问了该界面</span></span><br><span class="line"><span class="keyword">if</span>(s==<span class="keyword">null</span>)&#123;</span><br><span class="line">  response.sendRedirect(<span class="string">"login.jsp"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  out.print(s);</span><br><span class="line">&#125;</span><br><span class="line">%&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>运行结果如下:<br>
+Login.jsp:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/%E5%88%A9%E7%94%A8session%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/login.jsp.png" alt="login.jsp"><br>
+Welcome.jsp:<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/%E5%88%A9%E7%94%A8session%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/welcome.jsp.png" alt="welcome.jsp"></p>
+</li>
+</ol>
+<hr>
+<p><strong>注意:</strong> 虽然显示的是<code>/Welcome.jsp</code>的内容，但是地址栏中的url为<code>/doLogin.jsp</code>,因为是<code>Welcome.jsp</code>的地位是被共享的，所以里面的内容都被<code>doLogin.jsp</code>共享了，所以显示的是<code>doLogin.jsp</code>界面。</p>
+<p>备注: session的概念来源于<a href="https://baike.baidu.com/item/session/479100?fr=aladdin" target="_blank" rel="noopener">百度百科</a></p>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/06/利用session实现用户登录功能/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -893,24 +991,186 @@ Login.jsp</li>
 
       
         
-          <h1>Markdown 常用语法</h1>
-<br>
-## 简介
-> Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。
-## 标题
-1.用#来识别  
+          
+            <h1>Markdown 常用语法</h1>
+<p>&lt;br&gt;</p>
+<h2>简介</h2>
+<blockquote>
+<p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。</p>
+</blockquote>
+<h2>标题</h2>
+<p>1.用#来识别<br>
 例如：
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line"><span class="section">### 三级标题</span></span><br><span class="line"><span class="section">#### 四级标题</span></span><br><span class="line"><span class="code">     ...</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题</span></span><br><span class="line"><span class="section">## 二级标题</span></span><br><span class="line"><span class="section">### 三级标题</span></span><br><span class="line"><span class="section">#### 四级标题</span></span><br><span class="line"><span class="code">     ...</span></span><br></pre></td></tr></table></figure></p>
+<p>效果如下：
+&lt;!-- more --&gt;</p>
+<h1>一级标题</h1>
+<h2>二级标题</h2>
+<h3>三级标题</h3>
+<h4>四级标题</h4>
+<p>2.用-或者=标记<br>
+例如：
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一级标题</span><br><span class="line">-------</span><br><span class="line">二级标题</span><br><span class="line">=======</span><br></pre></td></tr></table></figure></p>
 <p>效果如下：</p>
-          <!--noindex-->
+<h1>一级标题</h1>
+<h2>二级标题</h2>
+<h2>列表</h2>
+<p>1.有序列表<br>
+有序列表很好写，只需要写(数字|字母|其他能排序的字符).+空格+后面的内容即可。形如（<code>1. 有序列表</code>）。<br>
+下面给出一个示例：
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>第一句话</span><br><span class="line"><span class="bullet">2. </span>第二句话</span><br><span class="line"><span class="bullet">3. </span>第二句话</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<ol>
+<li>第一句话</li>
+<li>第二句话</li>
+<li>第三句话</li>
+</ol>
+<p>2.无序列表</p>
+<p>无序列表直接在前面用-、+和*作为标记：
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>第一句话</span><br><span class="line"><span class="bullet">+ </span>第二句话</span><br><span class="line"><span class="bullet">* </span>第二句话</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：
+&lt;!-- more --&gt;</p>
+<ul>
+<li>第一句话</li>
+<li>第二句话</li>
+<li>第三句话</li>
+</ul>
+<h2>引用</h2>
+<p>这个用文字说明就很难说了，看下面的例子吧！！
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="quote">&gt; 这是一句引用    //在&gt;后面有一个空格</span></span><br><span class="line"><span class="quote">&gt;     引用一小段代码    //在&gt;后面五个空格</span></span><br><span class="line"><span class="quote">&gt; 以下是代码块：</span></span><br><span class="line">&gt;</span><br><span class="line"><span class="code">    public static void main(String[] args)&#123;</span></span><br><span class="line"><span class="code">    	System.out.println("这是一个代码块！");</span></span><br><span class="line"><span class="code">    &#125;</span></span><br><span class="line">&gt;一级引用</span><br><span class="line">&gt;&gt;二级引用</span><br><span class="line">&gt;&gt;&gt;三级引用</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<blockquote>
+<p>这是一句引用    //在&gt;后面有一个空格</p>
+<pre><code>引用一小段代码    //在&gt;后面五个空格
+</code></pre>
+<p>以下是代码块：</p>
+<pre><code>public static void main(String[] args){
+	System.out.println(&quot;这是一个代码块！&quot;);
+}
+</code></pre>
+<p>一级引用</p>
+<blockquote>
+<p>二级引用</p>
+<blockquote>
+<p>三级引用</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2>强调</h2>
+<p>两个*或者-代表加粗，一个*或者-代表斜体，~~ 代表删除,但是因为前端预览是js渲染的，后端输出php处理的，两者的markdown语法有差异~~来做删除线被认为是<strong>不规范的markdown语法</strong>，js渲染那边会去掉。建议采用html中<code>&lt;del&gt;</code>来删除。</p>
+<p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**加粗**</span>  </span><br><span class="line"><span class="emphasis">*斜体*</span>  </span><br><span class="line">~~删除~~  </span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">del</span>&gt;</span></span>删除<span class="xml"><span class="tag">&lt;/<span class="name">del</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>效果如下：
+<strong>加粗</strong><br>
+<em>斜体</em><br>
+<s>删除</s><br>
+&lt;del&gt;删除&lt;/del&gt;</p>
+<h2>链接</h2>
+<p>1.图片链接格式：<code>![]()</code>      <code>![填写图片文本(可忽略)](图片链接)</code><br>
+例如：</p>
+<blockquote>
+<pre><code>![](https://sqhoo.github.io/img/Cristiano.jpg)//行内式
+![][avatar]//参考式
+  //空一行
+[avatar]:https://sqhoo.github.io/img/Cristiano.jpg/
+</code></pre>
+</blockquote>
+<p>运行结果如下:<br>
+<img src="https://sqhoo.github.io/images/Cristiano.jpg" alt=""><br>
+<img src="https://sqhoo.github.io/images/Cristiano.jpg" alt=""></p>
+<p>2.超链接格式：<code>[]()</code>      <code>![文本](链接地址)</code><br>
+例如：</p>
+<blockquote>
+<pre><code>[返回主页](https:/sqhoo.github.io)//行内式
+[返回主页][url]//参考式
+//空一行
+[url]:https:/sqhoo.github.io
+&lt;https:/sqhoo.github.io&gt;//自动链接
+</code></pre>
+</blockquote>
+<p>运行结果如下：<br>
+<a href="https:/sqhoo.github.io" target="_blank" rel="noopener">返回主页</a><br>
+<a href="https://sqhoo.github.io">返回主页</a></p>
+<p><a href="https:/sqhoo.github.io" target="_blank" rel="noopener">https:/sqhoo.github.io</a></p>
+<h2>代码</h2>
+<p>1.行内代码</p>
+<p>行内代码使用`文字`来实现<br>
+代码块用```+语言名称，然后末尾再加上```结束，中间写内容实现代码高亮<br>
+例如：</p>
+<blockquote></blockquote>
+<p>行内代码<code>main(String[] args)</code>的例子<br>
+代码块的例子</p>
+<p><img src="https://sqhoo.github.io/blogImg/blog%E5%8C%BA/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/%E4%BB%A3%E7%A0%81%E5%9D%97.png" alt=""></p>
+<p>效果如下：<br>
+行内代码<code>main(String[] args)</code>的例子</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">	System.out.println(<span class="string">"这是一个代码块！"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2>表格</h2>
+<p>表格对齐格式</p>
+<ul>
+<li>居左: <code>:----</code></li>
+<li>居中: <code>:----:</code>或<code>----</code></li>
+<li>居右: <code>----:</code></li>
+</ul>
+<p>例如：<br>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|标题|标题|标题|</span><br><span class="line">|:---|:---:|---:|</span><br><span class="line">|left1|middle1|right1|</span><br><span class="line">|left2|middle3|right3|</span><br></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">标题</th>
+<th style="text-align:center">标题</th>
+<th style="text-align:right">标题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">left1</td>
+<td style="text-align:center">middle1</td>
+<td style="text-align:right">right1</td>
+</tr>
+<tr>
+<td style="text-align:left">left2</td>
+<td style="text-align:center">middle3</td>
+<td style="text-align:right">right3</td>
+</tr>
+</tbody>
+</table>
+<h2>分割线</h2>
+<p>在一行中写三个*、-或_实现一条分割线，且本行不能有任何的除空格以外的东西。<br>
+例如：
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="emphasis">***</span></span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="emphasis">___</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span><span class="bullet">* *</span></span><br></pre></td></tr></table></figure></p>
+<p>效果如下：</p>
+<hr>
+<hr>
+<hr>
+<hr>
+<h2>换行</h2>
+<p>在句尾加两个空格并另起一行表示换行
+例如：
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我要  换行      //没有加回车</span><br><span class="line">我要  </span><br><span class="line">换行      //加了两个空格</span><br></pre></td></tr></table></figure></p>
+<p>结果如下:<br>
+我要  换行</p>
+<p>我要<br>
+换行</p>
+<h2>脚注</h2>
+<p>用<code>[^]</code>来定义脚注
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">转到脚注1[^1]</span><br><span class="line">[<span class="symbol">^1</span>]: <span class="link">这里是脚注1</span></span><br></pre></td></tr></table></figure></p>
+<p>结果如下：
+这是一个脚注的例子<a href="%E8%BF%99%E9%87%8C%E6%98%AF%E8%84%9A%E6%B3%A8">^1</a></p>
+<p>**注意：**脚注不是markdown的基本语法，属于拓展语法，想实现这个功能，可以转到<a href="https://github.com/LouisBarranqueiro/hexo-footnotes" target="_blank" rel="noopener">https://github.com/LouisBarranqueiro/hexo-footnotes</a>下载拓展。我的这个网页没有这个拓展所以不支持，但是悬浮在上面可以看到左下角出来的内容含有这个注解。</p>
+<h2>使用HTML标签说明</h2>
+<p>在markdown中可以使用任何的html标签，因为.md文件最终是转成html传上去的。
+还是给出几个例子吧！
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">换行<span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">u</span>&gt;</span>下划线文本<span class="tag">&lt;/<span class="name">u</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:green"</span>&gt;</span>字体变色<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果如下
+换行&lt;br&gt;&lt;br&gt;
+&lt;u&gt;下划线文本&lt;/u&gt;
+&lt;p style=&quot;color:green&quot;&gt;原谅色&lt;/p&gt;</p>
+<hr>
+<p><strong>这些就是markdown常用语法，一般引用，代码高亮，分割线、标题级别、链接、列表比较常用。</strong></p>
+<p>&lt;p style=&quot;color:#0088cc&quot;&gt;这是本人的第一个博客，将别人博客一些内容和自己的内容整合了一下，格式略糙，感谢支持QAQ！！！&lt;/p&gt;</p>
+<p>备注：Markdown简介来源<a href="https://baike.baidu.com/item/markdown/3245829?fr=aladdin" target="_blank" rel="noopener">百度百科</a></p>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/02/Markdown常用语法/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>

@@ -516,24 +516,64 @@
 
       
         
-          <h2 id="什么是springcloud"><a class="header-anchor" href="#什么是springcloud">¶</a>什么是<a href="https://baike.baidu.com/item/spring%20cloud/20269825?fr=aladdin" target="_blank" rel="noopener">SpringCloud</a></h2>
+          
+            <h2>什么是<a href="https://baike.baidu.com/item/spring%20cloud/20269825?fr=aladdin" target="_blank" rel="noopener">SpringCloud</a></h2>
 <blockquote>
 <p>Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring Cloud并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。</p>
 </blockquote>
-<h2 id="创建服务注册中心"><a class="header-anchor" href="#创建服务注册中心">¶</a>创建服务注册中心</h2>
+<h2>创建服务注册中心</h2>
 <p>这里采用Eureka作为服务注册与发现的组件</p>
 <ol>
-<li>创建一个springboot项目，勾选Eureka组件</li>
+<li>
+<p>创建一个springboot项目，勾选Eureka组件
+&lt;!-- more --&gt;
+<img src="https://sqhoo.github.io/blogImg/java%E6%A1%86%E6%9E%B6%E5%8C%BA/SpringCloud%E5%88%A9%E7%94%A8Eureka%E6%90%AD%E5%BB%BA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/pic1.png" alt="pic1"></p>
+</li>
+<li>
+<p>编写配置文件（这里使用yml类型的配置文件）<br>
+application.yml
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置服务器端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8761</span></span><br><span class="line"><span class="comment">#配置eureka注册相关配置</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">    fetch-registry:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment">#配置注册中心url</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultzone:</span> <span class="attr">http://localhost:$&#123;server.port&#125;/eureka/</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>编写启动类<br>
+在启动类上加上<code>@EnableEurekaServer</code>来标识这是注册中心
+SpringcloudServerApplication.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaServer</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringcloudServerApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(SpringcloudServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>启动服务<br>
+访问<code>http://localhost:8761</code>能看到以下界面，但是还没有服务注册进来
+<img src="https://sqhoo.github.io/blogImg/java%E6%A1%86%E6%9E%B6%E5%8C%BA/SpringCloud%E5%88%A9%E7%94%A8Eureka%E6%90%AD%E5%BB%BA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/pic2.png" alt="pic2"></p>
+</li>
 </ol>
-          <!--noindex-->
+<h2>创建一个client服务</h2>
+<ol>
+<li>
+<p>创建项目的步骤和之前的步骤一样，创建好项目之后，需要配置<code>application.yml</code>文件
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置服务的名称</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">service-client</span></span><br><span class="line"><span class="comment">#设置服务器的端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8762</span></span><br><span class="line"><span class="comment">#设置服务注册中心地址</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://localhost:8761/eureka/</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>编写启动类<br>
+通过注解<code>@EnableEurekaClient</code> 表明自己是一个eurekaclient
+SpringcloudClientApplication.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springcloudclient;</span><br><span class="line"></span><br><span class="line"><span class="meta">@EnableEurekaClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringcloudClientApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(SpringcloudClientApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;server.port&#125;"</span>)</span><br><span class="line">    String port;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/client"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">client1</span><span class="params">(@RequestParam String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hi "</span>+name+<span class="string">" this is port:"</span>+port;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<h2>启动工程</h2>
+<ol>
+<li>访问<code>http://localhost:8761</code>，可以看到服务已经被注册到注册中心<br>
+<img src="https://sqhoo.github.io/blogImg/java%E6%A1%86%E6%9E%B6%E5%8C%BA/SpringCloud%E5%88%A9%E7%94%A8Eureka%E6%90%AD%E5%BB%BA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/pic3.png" alt="pic3"></li>
+<li>这时候可以访问<code>http://localhost:8762/client?name=tom</code><br>
+页面显示为
+<img src="https://sqhoo.github.io/blogImg/java%E6%A1%86%E6%9E%B6%E5%8C%BA/SpringCloud%E5%88%A9%E7%94%A8Eureka%E6%90%AD%E5%BB%BA%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/pic4.png" alt="pic4"></li>
+</ol>
+<h2>参考资料</h2>
+<ul>
+<li><a href="https://blog.csdn.net/forezp/article/details/81040925" target="_blank" rel="noopener">https://blog.csdn.net/forezp/article/details/81040925</a></li>
+<li><a href="https://baike.baidu.com/item/spring%20cloud/20269825?fr=aladdin" target="_blank" rel="noopener">百度百科</a></li>
+</ul>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/18/SpringCloud利用Eureka搭建注册中心/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -705,27 +745,84 @@
 
       
         
-          <h2 id="什么是springboot"><a class="header-anchor" href="#什么是springboot">¶</a>什么是<a href="https://baike.baidu.com/item/Spring%20Boot/20249767?fr=aladdin" target="_blank" rel="noopener">springboot</a></h2>
+          
+            <h2>什么是<a href="https://baike.baidu.com/item/Spring%20Boot/20249767?fr=aladdin" target="_blank" rel="noopener">springboot</a></h2>
 <blockquote>
 <p>Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。</p>
 </blockquote>
-<h2 id="搭建mvc框架"><a class="header-anchor" href="#搭建mvc框架">¶</a>搭建MVC框架</h2>
+<h2>搭建MVC框架</h2>
 <ol>
 <li>在pom文件中导入依赖</li>
 </ol>
 <ul>
-<li>说明：</li>
+<li>说明：
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这一块是springboot核心依赖部分 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这一块是springboot核心依赖部分 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.1.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
+<p>&lt;!-- more --&gt;</p>
+<ul>
+<li>依赖：
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 这里我们使用阿里巴巴的数据库连接池 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- springboot web项目相关依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- mybatis 依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 视图解析器的依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- mysql数据库连接依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="2">
+<li>配置文件<br>
+这里我们采用yml文件来配置<br>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 服务器配置</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="comment"># 配置服务器端口号</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8080</span></span><br><span class="line">  <span class="comment"># 配置启动根路径</span></span><br><span class="line"><span class="attr">  servlet:</span></span><br><span class="line"><span class="attr">    context-path:</span> <span class="string">/hsq</span></span><br><span class="line"><span class="comment"># spring的配置</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="comment"># 配置数据源以及连接池</span></span><br><span class="line"><span class="attr">  datasource:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">jdbc:mysql://localhost:3306/happyCake</span></span><br><span class="line"><span class="attr">    username:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    password:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">    platform:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">    driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line"><span class="comment"># mybatis配置</span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="comment"># 配置实体类的包路径</span></span><br><span class="line"><span class="attr">  type-aliases-package:</span> <span class="string">com.springboot.entity</span></span><br><span class="line">  <span class="comment"># 配置驼峰命名规则</span></span><br><span class="line"><span class="attr">  configuration:</span></span><br><span class="line"><span class="attr">    map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># 配置mapper.xml文件扫描</span></span><br><span class="line"><span class="attr">  mapper-locations:</span> <span class="attr">classpath:mapper/*.xml</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>**这里需要注意:**如果出现<code>configuration</code>与<code>config-locations</code>不能同时存在的错误，需要将<code>config-locations</code>换成<code>mapper-locations</code></p>
+<ol start="3">
+<li>开始进行包的创建</li>
+</ol>
+<ul>
+<li>
+<p>我的项目的包结构如下<br>
+<img src="https://sqhoo.github.io/blogImg/java%E6%A1%86%E6%9E%B6%E5%8C%BA/%E5%88%A9%E7%94%A8SpringBoot%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E7%9A%84MVC%E7%8E%AF%E5%A2%83/pic1.png" alt=""></p>
+</li>
+<li>
+<p>编写实体类
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springboot.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String userId;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> String userEmail;</span><br><span class="line">    <span class="keyword">private</span> String userTel;</span><br><span class="line">    <span class="keyword">private</span> String userTime;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 此处省略getter和setter方法</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>编写dao层<br>
+创建dao层接口<code>UserDao</code>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springboot.dao;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注解Mapper作用是将此接口交给spring管理（IOC）</span></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> </span>&#123;</span><br><span class="line">    <span class="function">List&lt;User&gt; <span class="title">getUser</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>编写<code>mapper.xml</code>文件
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"com.springboot.dao.UserDao"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- id需要与UserDao的方法名相同 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getUser"</span> <span class="attr">resultType</span>=<span class="string">"User"</span>&gt;</span></span><br><span class="line">        select * from user</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>编写service层</p>
+</li>
+</ul>
+<ol>
+<li>
+<p>先创建好接口
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springboot.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.springboot.entity.User;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getUser</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>然后编写实现类
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springboot.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将UserServiceImpl控制权交给spring（IOC）</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line"></span><br><span class="line"><span class="comment">// idea编译器userDao报红为编译器bug，不用理会</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserServiceImpl</span><span class="params">(UserDao userDao)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userDao = userDao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userDao.getUser();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<p><strong>注意:</strong><code>@Autowired</code>最好注解在构造函数上，因为当这个类生成时，先执行构造方法，如果构造方法已经用到<code>userDao</code>这个变量时，<code>userDao</code>还没有被注入，会出错，并且<code>userDao</code>一定是final类型，可写可不写。
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 类似这种写法会报错</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserServiceImpl</span><span class="params">(UserDao userDao)</span> </span>&#123;</span><br><span class="line">        List&lt;User&gt; user = <span class="keyword">this</span>.userDao.getUser();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>编写控制器
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springboot.control;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此注解为@ResponseBody与@Controller的合体</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="comment">// 此控制器映射在/根目录/user下</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserControl</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserControl</span><span class="params">(UserService userService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.userService = userService;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 此接口映射在/根目录/user/getUser下</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/getUser"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">getUser</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userService.getUser();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="4">
+<li>
+<p>编写main函数
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.springboot;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此注解为标示此类为springboot启动类</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringbootApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(SpringbootApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>运行结果<br>
+访问<code>http://localhost:8080/hsq/user/getUser</code><br>
+<img src="https://sqhoo.github.io/blogImg/java%E6%A1%86%E6%9E%B6%E5%8C%BA/%E5%88%A9%E7%94%A8SpringBoot%E6%90%AD%E5%BB%BA%E7%AE%80%E5%8D%95%E7%9A%84MVC%E7%8E%AF%E5%A2%83/pic2.png" alt=""></p>
+</li>
+</ol>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/11/利用SpringBoot搭建简单的MVC环境/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -897,17 +994,18 @@
 
       
         
-          <h3 id="什么是线程"><a class="header-anchor" href="#什么是线程">¶</a>什么是线程</h3>
+          
+            <h3>什么是线程</h3>
 <blockquote>
 <p>线程是进程中的一个实体，是被系统独立调度和分派的基本单位</p>
 </blockquote>
-<h3 id="线程和进程的区别"><a class="header-anchor" href="#线程和进程的区别">¶</a>线程和进程的区别</h3>
+<h3>线程和进程的区别</h3>
 <blockquote>
 <p>  进程:具有一定独立功能的程序关于某个数据集合上的一次运行活动,是操作系统进行资源分配和调度的一个独立单位。<br>
   线程:是进程的一个实体,是 cpu 调度和分派的基本单位,是比进程更小的可以独立运行的基本单位。<br>
   特点:线程的划分尺度小于进程,这使多线程程序拥有高并发性,进程在运行时各自内存单元相互独立,线程之间内存共享,这使多线程编程可以拥有更好的性能和用户体验。</p>
 </blockquote>
-<h3 id="创建线程的4种方法"><a class="header-anchor" href="#创建线程的4种方法">¶</a>创建线程的4种方法</h3>
+<h3>创建线程的4种方法</h3>
 <ol>
 <li>继承Thread类</li>
 </ol>
@@ -920,20 +1018,103 @@
 </li>
 <li>
 <p>调用该线程的start方法以启动线程</p>
-<p>ThreadMethod.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadMethod</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"继承Thread方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
+<p>ThreadMethod.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadMethod</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"继承Thread方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&lt;!-- more --&gt;<br>
+Test.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">5</span>;i++)&#123;</span><br><span class="line">        <span class="keyword">new</span> ThreadMethod().start();</span><br><span class="line">        Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<ol start="2">
+<li>实现Runable接口</li>
+</ol>
+<ul>
+<li>
+<p>定义一个类实现Runable接口，重写run方法</p>
+</li>
+<li>
+<p>创建该类的实例为Thread的Target参数，再创建一个Thread对象，将Target传入其构造函数中</p>
+</li>
+<li>
+<p>调用该Thread对象的start方法以启动线程</p>
+<p>RunableMethod.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunableMethod</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"实现Runable方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Test.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    RunableMethod runableMethod=<span class="keyword">new</span> RunableMethod();</span><br><span class="line">    Thread thread=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">5</span>;i++)&#123;</span><br><span class="line">        thread=<span class="keyword">new</span> Thread(runableMethod);</span><br><span class="line">        thread.start();</span><br><span class="line">        Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+<ol start="3">
+<li>实现callable接口
+<blockquote>
+<p>特点：callable实现call方法来作为执行体，有返回值</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>创建一个类实现Callable接口，重写call方法</li>
+<li>在测试类中创建一个线程池，用来从中取得线程对象</li>
+<li>创建这个类的对象，并同时创建一个FutureTask对象用来存放它</li>
+<li>将这个FutureTask对象上传到线程池对象中</li>
+<li>最后关闭线程池</li>
+</ul>
+<p>CallableMethod.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallableMethod</span> <span class="keyword">implements</span> <span class="title">Callable</span></span>&#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">         System.out.println(<span class="string">"callable启动了"</span>);</span><br><span class="line">         <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Test.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">name</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">     ExecutorService executorService= Executors.newCachedThreadPool();</span><br><span class="line">     CallableMethod callableMethod=<span class="keyword">null</span>;</span><br><span class="line">     FutureTask&lt;Integer&gt; futureTask=<span class="keyword">null</span>;</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">         callableMethod=<span class="keyword">new</span> CallableMethod();</span><br><span class="line">         futureTask=<span class="keyword">new</span> FutureTask&lt;Integer&gt;(callableMethod);</span><br><span class="line">         executorService.submit(futureTask);</span><br><span class="line">         Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">     &#125;</span><br><span class="line">     executorService.shutdown();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="4">
+<li>
+<p>利用线程池创建线程</p>
+<blockquote>
+<p>什么是线程池：线程池就是事先将多个对象放到一个容器中，当使用的时候就不用创建线程对象而是直接去线程池中拿线程即可。节省了开辟线程的时间，提高代码的执行效率。
+常用线程池:<br>
+1. newSingleThreadExecutor:创建一个单线程的线程池,此线程池保证所有任务的执行顺序按照任务的提交顺序执行。<br>
+2. newFixedThreadPool:创建固定大小的线程池,每次提交一个任务就创建一个线程,直到线程达到线程池的最大大小。<br>
+3. newCachedThreadPool:创建一个可缓存的线程池,此线程池不会对线程池大小做限制,线程池大小完全依赖于操作系统(或者说 JVM)能够创建的最大线程大小。<br>
+4. newScheduledThreadPool:创建一个大小无限的线程池,此线程池支持定时以及周期性执行任务的需求。<br>
+5. newSingleThreadExecutor:创建一个单线程的线程池。此线程池支持定时以及周期性执行任务的需求。</p>
+</blockquote>
+<p>Mythread.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mythread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">     <span class="meta">@Override</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         System.out.println(Thread.currentThread().getName()+<span class="string">"   正在执行。。。。"</span>);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Test.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         ExecutorService pool= Executors.newFixedThreadPool(<span class="number">3</span>);<span class="comment">//创建一个固定大小的线程池</span></span><br><span class="line">         Thread t1=<span class="keyword">new</span> Mythread();</span><br><span class="line">         Thread t2=<span class="keyword">new</span> Mythread();</span><br><span class="line">         Thread t3=<span class="keyword">new</span> Mythread();</span><br><span class="line">         pool.execute(t1);</span><br><span class="line">         pool.execute(t2);</span><br><span class="line">         pool.execute(t3);</span><br><span class="line">         pool.shutdown();</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ol>
+<p><strong>注意：</strong> 线程默认先执行当前类的线程(主线程)，然后再执行其他的线程。</p>
+<h3>synchronized 和 volatile 关键字的作用</h3>
+<ul>
+<li>
+<p>volatile<br>
+1）一旦一个成员变量或静态成员变量被volatile修饰后,就具备了两层意义<br>
+a.保证了不同线程对变量进行操作的可见性,也就是一个线程修改了值，这个值对其他线程也是可见的。<br>
+b.禁止进行指令重排序。<br>
+2）volatile本质是告诉jvm当前变量在寄存器中的值是不确定的,需要从主存中读取。<br>
+3）只能使用在变量级别。<br>
+4）仅能实现变量的修改可见性，但是不能保证原子性。<br>
+5）不会造成线程阻塞。<br>
+6）volatile标记的变量不会被编译器优化。</p>
+</li>
+<li>
+<p>synchronized<br>
+1）锁定当前变量，只有当前线程可以访问该变量，其他线程被阻塞<br>
+2）sychronized可以使用在变量、方法和类级别<br>
+3）sychronized可以保证变量修改的可见性和原子性<br>
+4）可能造成线程阻塞<br>
+5）sychronized标记的变量会被编译器优化<br>
+需求：循环打印A和B十次<br>
+TestA.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestA</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (TestAll.testAll) &#123;</span><br><span class="line">                System.out.println(<span class="string">"A"</span>);</span><br><span class="line">                count--;</span><br><span class="line">                TestAll.testAll.notify();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    TestAll.testAll.wait();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<pre><code>TestB.java
+</code></pre>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestB</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">while</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (TestAll.testAll) &#123;</span><br><span class="line">                System.out.println(<span class="string">"B"</span>);</span><br><span class="line">                count--;</span><br><span class="line">                TestAll.testAll.notify();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    TestAll.testAll.wait();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>TestAll.java
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAll</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> TestAll testAll=<span class="keyword">new</span> TestAll();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> TestA()).start();</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> TestB()).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+</ul>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/09/04/多线程相关知识总结/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
-    </li></ul></div>
+    </div>
 
     
 
@@ -1102,7 +1283,8 @@
 
       
         
-          <h2 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h2>
+          
+            <h2>前言</h2>
 <p>我们先来了解一下http协议的请求流程：</p>
 <ol>
 <li>建立连接：客户端与服务器建立TCP连接.</li>
@@ -1110,20 +1292,50 @@
 <li>发送响应：服务器在处理完客户端请求之后，要向客户端发送响应消息。</li>
 <li>关闭连接：客户端和服务器端都可以关闭套接字来结束TCP/IP对话</li>
 </ol>
-<h2 id="tcp-ip-协议"><a class="header-anchor" href="#tcp-ip-协议">¶</a><a href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">TCP/IP 协议</a></h2>
+<h2><a href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">TCP/IP 协议</a></h2>
 <blockquote>
 <p>Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台联网设备规定一个地址。</p>
 </blockquote>
-<h3 id="重要的符号"><a class="header-anchor" href="#重要的符号">¶</a>重要的符号</h3>
-          <!--noindex-->
+<h3>重要的符号</h3>
+<p>&lt;!-- more --&gt;
+<img src="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%871.png" alt=""></p>
+<ol>
+<li>Seq序号：用来标识从TCP源端向目的端发送的字节流，发起方发送数据时对此进行标记。</li>
+<li>Ack序号：确认序号，只有ACK标志位为1时，确认序号字段才有效，Ack=Seq+1。</li>
+<li>标志位:
+<ul>
+<li>URG：紧急指针有效</li>
+<li>ACK：确认序号有效</li>
+<li>PSH：接收方应该尽快将这个报文交给应用层</li>
+<li>RST：重置连接</li>
+<li>SYN：发起一个新连接</li>
+<li>FIN：释放一个连接</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意:</strong> ACK表示的是确认序号有效的标志，Ack序号是一个序号，它的值是确认序号的值+1</p>
+<h3>三次握手</h3>
+<p><img src="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%872.png" alt=""></p>
+<ol>
+<li>第一次握手：客户端是发起一个新连接，将SYN置为1，随机产生一个序号j赋值给seq，将这两个数据以包的形式发送给客户端，客户端进入了SYN_SENT状态，等待服务端确认。</li>
+<li>第二次握手：服务端收到数据包后，检查SYN为1，知道了客户端请求建立连接，将SYN和ACK都置为1，并将Ack序号置为客户端的确认序号seq+1（j+1），然后又随机产生一个新序号k赋值给seq,将这四个数据以包的形式传给客户端确认连接请求，服务端进入SYN_RCVD状态。</li>
+<li>第三次握手：客户端收到数据包后，确认ACK是否为1以确认第一次握手中的seq是否有效，在检查Ack序号是否为j+1，满足则将ACK置为1，Ack序号置为服务端的确认序号seq+1（k+1）,将这些数据以包的形式发送给服务端，服务端如果检查到ACK为1，Ack序号为k+1，则建立成功，服务端和客户端进入ESTABLISHED状态，三次握手完成。</li>
+</ol>
+<h3>四次挥手</h3>
+<p><img src="https://sqhoo.github.io/blogImg/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8C%BA/TcpIp%E5%8D%8F%E8%AE%AE/%E5%9B%BE%E7%89%873.png" alt=""></p>
+<ol>
+<li>第一次挥手：客户端发送一个FIN传达释放连接指令，随机产生一个序号j赋值给seq，进入FIN_WAIT_1状态</li>
+<li>第二次挥手：服务端收到了客户端发来的FIN信号，同样需要发送ACK以确认seq有效，还需要置Ack为j+1并一起发送到服务端，并随机产生一个序号k赋值给seq。服务器进入CLOSE_WAIT状态</li>
+<li>第三次挥手：服务器发送一个FIN，再发送一次ACK=1，用来关闭服务器到客户端之间的数据传送。服务端进入LAST_ACK状态</li>
+<li>第四次挥手：客户端收到的ACK为1且Ack序号为j+1，则将ACK置为1表示确认序号有效，将Ack序号置为k+1，将数据以包的形式传给服务端，服务端收到检查到ACK为1表示确认序号有效，且Ack序号为k+1,则进入CLOSE状态，完成四次挥手。</li>
+</ol>
+<p><strong>注意:</strong><br>
+为什么挥手为四次，握手为三次？
+因为在三次握手中，服务端收到了SYN=1信号，表示建立一个连接且可接收数据，服务器再将数据包传递给客户端确认已确认连接。但是在四次挥手中，服务器收到FIN=1时，表示发送了一个关闭连接的请求，但是并不代表客户端不能接受数据，所以先将一些数据包发给客户端，然后再发送FIN确认关闭请求。所以会与FIN分开发送。</p>
+<h3>备注</h3>
+<p><a href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">TCP/IP 协议</a>的概念来源于百度百科</p>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/26/Tcp-ip协议/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -1295,26 +1507,32 @@
 
       
         
-          <h2 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h2>
+          
+            <h2>前言</h2>
 <p>如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的<code>jsp:include</code>标签可以实现母版页这个功能。</p>
-<h2 id="使用方法"><a class="header-anchor" href="#使用方法">¶</a>使用方法</h2>
+<h2>使用方法</h2>
 <ol>
-<li>新建一个<code>mater.jsp</code>页面<br>
-代码如下：</li>
+<li>
+<p>新建一个<code>mater.jsp</code>页面<br>
+代码如下：<br>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--其他代码从这里拼接--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">jsp:include</span> <span class="attr">page</span>=<span class="string">"&lt;%= request.getParameter(\"</span><span class="attr">page</span>\")%&gt;</span>"/&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>新建一个<code>son.jsp</code>页面<br>
+&lt;!-- more --&gt;
+代码如下：<br>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>hello,son.jsp<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>在浏览器访问 <code>你的页面路径/master,jsp?page=son.jsp</code><br>
+结果如下<br>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/%E5%88%A9%E7%94%A8jsp%E5%AE%9E%E7%8E%B0%E6%AF%8D%E7%89%88%E9%A1%B5/jsp%E6%AF%8D%E7%89%88%E9%A1%B5.png" alt=""></p>
+</li>
 </ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--其他代码从这里拼接--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">jsp:include</span> <span class="attr">page</span>=<span class="string">"&lt;%= request.getParameter(\"</span><span class="attr">page</span>\")%&gt;</span>"/&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>新建一个<code>son.jsp</code>页面</li>
-</ol>
-          <!--noindex-->
+<h2>说明</h2>
+<p>这种方法将<code>master.jsp</code>变成了母版页,只需要page的参数改变即可得到不同的界面共用相同的框架。page后面的参数值也可以是html页面。</p>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/07/19/利用jsp实现母版页/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>

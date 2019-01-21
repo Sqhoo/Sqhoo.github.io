@@ -119,19 +119,19 @@
 
 
 
-  <meta name="description" content="¶前言 如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的jsp:include标签可以实现母版页这个功能。 ¶使用方法  新建一个mater.jsp页面 代码如下：  12345678910&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&amp;gt;&amp;lt;ht">
+  <meta name="description" content="前言 如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的jsp:include标签可以实现母版页这个功能。 使用方法   新建一个mater.jsp页面 代码如下： 12345678910&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&amp;gt;&amp;lt;html">
 <meta name="keywords" content="随笔">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用jsp实现母版页">
 <meta property="og:url" content="http://Sqhoo.github.io/2018/07/19/利用jsp实现母版页/index.html">
 <meta property="og:site_name" content="Sqhoo">
-<meta property="og:description" content="¶前言 如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的jsp:include标签可以实现母版页这个功能。 ¶使用方法  新建一个mater.jsp页面 代码如下：  12345678910&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&amp;gt;&amp;lt;ht">
+<meta property="og:description" content="前言 如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的jsp:include标签可以实现母版页这个功能。 使用方法   新建一个mater.jsp页面 代码如下： 12345678910&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&amp;gt;&amp;lt;html">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/%E5%88%A9%E7%94%A8jsp%E5%AE%9E%E7%8E%B0%E6%AF%8D%E7%89%88%E9%A1%B5/jsp%E6%AF%8D%E7%89%88%E9%A1%B5.png">
 <meta property="og:updated_time" content="2018-07-19T21:43:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用jsp实现母版页">
-<meta name="twitter:description" content="¶前言 如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的jsp:include标签可以实现母版页这个功能。 ¶使用方法  新建一个mater.jsp页面 代码如下：  12345678910&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&amp;gt;&amp;lt;ht">
+<meta name="twitter:description" content="前言 如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的jsp:include标签可以实现母版页这个功能。 使用方法   新建一个mater.jsp页面 代码如下： 12345678910&amp;lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&amp;gt;&amp;lt;html">
 <meta name="twitter:image" content="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/%E5%88%A9%E7%94%A8jsp%E5%AE%9E%E7%8E%B0%E6%AF%8D%E7%89%88%E9%A1%B5/jsp%E6%AF%8D%E7%89%88%E9%A1%B5.png">
 
 
@@ -528,26 +528,28 @@
       
 
       
-        <h2 id="前言"><a class="header-anchor" href="#前言">¶</a>前言</h2>
+        <h2>前言</h2>
 <p>如果制作若干使用相同外观框架且某个部分的内容不同的界面时，普通的html是不能实现这种功能的。jsp中的<code>jsp:include</code>标签可以实现母版页这个功能。</p>
-<h2 id="使用方法"><a class="header-anchor" href="#使用方法">¶</a>使用方法</h2>
+<h2>使用方法</h2>
 <ol>
-<li>新建一个<code>mater.jsp</code>页面<br>
-代码如下：</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--其他代码从这里拼接--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">jsp:include</span> <span class="attr">page</span>=<span class="string">"&lt;%= request.getParameter(\"</span><span class="attr">page</span>\")%&gt;</span>"/&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>新建一个<code>son.jsp</code>页面</li>
-</ol>
-<a id="more"></a>
-<p>代码如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>hello,son.jsp<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>在浏览器访问 <code>你的页面路径/master,jsp?page=son.jsp</code><br>
+<li>
+<p>新建一个<code>mater.jsp</code>页面<br>
+代码如下：<br>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">contentType</span>=<span class="string">"text/html;charset=UTF-8"</span> <span class="attr">language</span>=<span class="string">"java"</span> %&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--其他代码从这里拼接--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">jsp:include</span> <span class="attr">page</span>=<span class="string">"&lt;%= request.getParameter(\"</span><span class="attr">page</span>\")%&gt;</span>"/&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>新建一个<code>son.jsp</code>页面<br>
+&lt;!-- more --&gt;
+代码如下：<br>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>hello,son.jsp<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li>
+<p>在浏览器访问 <code>你的页面路径/master,jsp?page=son.jsp</code><br>
 结果如下<br>
-<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/%E5%88%A9%E7%94%A8jsp%E5%AE%9E%E7%8E%B0%E6%AF%8D%E7%89%88%E9%A1%B5/jsp%E6%AF%8D%E7%89%88%E9%A1%B5.png" alt=""></li>
+<img src="https://sqhoo.github.io/blogImg/jsp%E5%8C%BA/%E5%88%A9%E7%94%A8jsp%E5%AE%9E%E7%8E%B0%E6%AF%8D%E7%89%88%E9%A1%B5/jsp%E6%AF%8D%E7%89%88%E9%A1%B5.png" alt=""></p>
+</li>
 </ol>
-<h2 id="说明"><a class="header-anchor" href="#说明">¶</a>说明</h2>
+<h2>说明</h2>
 <p>这种方法将<code>master.jsp</code>变成了母版页,只需要page的参数改变即可得到不同的界面共用相同的框架。page后面的参数值也可以是html页面。</p>
 
       
@@ -847,7 +849,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">¶前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">¶使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">3.</span> <span class="nav-text">¶说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">说明</span></a></li></ol></div>
             
 
           </div>
